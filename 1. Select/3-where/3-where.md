@@ -2,11 +2,11 @@
 DROP TABLE transactions;
 
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,
     age INTEGER NOT NULL,
     country_code TEXT NOT NULL,
-    username TEXT UNIQUE,
+    username VARCHAR(100) UNIQUE,
     password TEXT NOT NULL,
     is_admin BOOLEAN
 );
