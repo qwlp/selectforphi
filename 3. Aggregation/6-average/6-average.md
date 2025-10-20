@@ -50,7 +50,7 @@ INSERT INTO users(name, age, country_code, username, password, is_admin)
 VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 
 CREATE TABLE transactions (
-    id INTEGER PRIMARY KEY, 
+    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
     recipient_id INTEGER, 
     sender_id INTEGER, 
     note TEXT, 
