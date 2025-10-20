@@ -17,6 +17,6 @@ SELECT * FROM customers;
 * The * in this query means we are gonna select all the **columns/attributes** yep
 * Customers is the table we are selecting from
 
-Give it a try!!!!! 
+Give it a try!!!!!
 
 Now then how would we select **only the customer_id** column.
