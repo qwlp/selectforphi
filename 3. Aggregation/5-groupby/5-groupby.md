@@ -1,7 +1,7 @@
 ```sql
 DROP TABLE users;
 CREATE TABLE transactions (
-  id INTEGER PRIMARY KEY, 
+  id INTEGER PRIMARY KEY AUTO_INCREMENT, 
   user_id INTEGER NOT NULL,
   recipient_id INTEGER, 
   sender_id INTEGER, 
