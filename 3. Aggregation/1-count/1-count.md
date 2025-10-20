@@ -1,4 +1,5 @@
 ```sql
+DROP TABLE transactions;
 CREATE TABLE transactions (
   id INTEGER PRIMARY KEY AUTO_INCREMENT, 
   user_id INTEGER NOT NULL,
