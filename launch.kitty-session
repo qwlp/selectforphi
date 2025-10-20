@@ -1,4 +1,0 @@
-layout tall
-cd ~/DMUC/sql/
-
-launch --title "SQL" /usr/bin/nvim .
