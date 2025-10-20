@@ -2,7 +2,7 @@
 DROP TABLE users;
 
 CREATE TABLE transactions (
-    id INTEGER PRIMARY KEY, 
+    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
     recipient_id INTEGER, 
     sender_id INTEGER, 
     note TEXT, 
