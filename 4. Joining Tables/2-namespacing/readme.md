@@ -3,7 +3,7 @@ DROP TABLE users;
 DROP TABLE countries;
 CREATE TABLE countries (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  country_code VARCHAR(100),
+  country_code VARCHAR(100) UNIQUE,
   name TEXT
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     is_admin BOOLEAN,
 	FOREIGN KEY (country_code)
-	REFERENCES users(country_code)
+	REFERENCES countries(country_code)
 );
 
 INSERT INTO users(id, name, age, country_code, username, password, is_admin)
@@ -72,8 +72,6 @@ VALUES ('Alvin', 27, 'US', 'AlvinA27', 'easter_egg', false);
 
 INSERT INTO users(name, age, country_code, username, password, is_admin)
 VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
-
-
 ```
 # Namespacing on Tables
 
