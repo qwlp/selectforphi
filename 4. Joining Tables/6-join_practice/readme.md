@@ -1,15 +1,39 @@
 ```sql
-DROP TABLE countries;
 DROP TABLE users;
+DROP TABLE countries;
 DROP TABLE transactions;
+
+CREATE TABLE countries (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  country_code VARCHAR(100) UNIQUE,
+  name TEXT
+);
+
+INSERT INTO countries(country_code, name)
+VALUES ('US', 'United States');
+
+INSERT INTO countries(country_code, name)
+VALUES ('CA', 'Canada');
+
+INSERT INTO countries(country_code, name)
+VALUES ('IN', 'India');
+
+INSERT INTO countries(country_code, name)
+VALUES ('JP', 'Japan');
+
+INSERT INTO countries(country_code, name)
+VALUES ('BR', 'Brazil');
+
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
     name TEXT NOT NULL,
     age INTEGER NOT NULL,
-    country_code TEXT NOT NULL,
-    username TEXT UNIQUE,
+    country_code VARCHAR(100) NOT NULL,
+    username VARCHAR(100) UNIQUE,
     password TEXT NOT NULL,
-    is_admin BOOLEAN
+    is_admin BOOLEAN,
+	FOREIGN KEY (country_code)
+	REFERENCES countries(country_code)
 );
 
 INSERT INTO users(id, name, age, country_code, username, password, is_admin)
@@ -51,31 +75,8 @@ VALUES ('Alvin', 27, 'US', 'AlvinA27', 'easter_egg', false);
 INSERT INTO users(name, age, country_code, username, password, is_admin)
 VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 
-CREATE TABLE countries (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  country_code TEXT,
-  name TEXT,
-  FOREIGN KEY (country_code)
-  REFERENCES users (country_code)
-);
-
-INSERT INTO countries(country_code, name)
-VALUES ('US', 'United States');
-
-INSERT INTO countries(country_code, name)
-VALUES ('CA', 'Canada');
-
-INSERT INTO countries(country_code, name)
-VALUES ('IN', 'India');
-
-INSERT INTO countries(country_code, name)
-VALUES ('JP', 'Japan');
-
-INSERT INTO countries(country_code, name)
-VALUES ('BR', 'Brazil');
-
 CREATE TABLE transactions (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   user_id INTEGER NOT NULL,
   recipient_id INTEGER,
   sender_id INTEGER,
