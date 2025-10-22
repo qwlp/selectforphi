@@ -1,5 +1,6 @@
 ```sql
 DROP TABLE users;
+DROP TABLE transactions;
 CREATE TABLE countries (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   country_code VARCHAR(100) UNIQUE,
