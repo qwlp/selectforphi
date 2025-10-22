@@ -1,65 +1,12 @@
 ```sql
 DROP TABLE users;
 DROP TABLE countries;
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name TEXT NOT NULL,
-    age INTEGER NOT NULL,
-    country_code TEXT NOT NULL,
-    username VARCHAR(100) UNIQUE,
-    password TEXT NOT NULL,
-    is_admin BOOLEAN
-);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (1, 'David', 34, 'US', 'DavidDev', 'insertPractice', false);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (2, 'Samantha', 29, 'BR', 'Sammy93', 'addingRecords!', false);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (3, 'John', 39, 'CA', 'Jjdev21', 'welovebootdev', false);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (4, 'Ram', 42, 'IN', 'Ram11c', 'thisSQLcourserocks', false);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (5, 'Hunter', 30, 'US', 'Hdev92', 'backendDev', false);
-
-INSERT INTO users(id, name, age, country_code, username, password, is_admin)
-VALUES (6, 'Allan', 27, 'US', 'Alires', 'iLoveB00tdev', true);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Lance', 20, 'US', 'LanChr', 'b00tdevisbest', false);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Tiffany', 28, 'US', 'Tifferoon', 'autoincrement', true);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Lane', 27, 'US', 'wagslane', 'update_me', false);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Darren', 15, 'CA', 'Dshan', 'found_me', false);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Albert', 55, 'BR', 'BertDev', 'one_al_name', false);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Alvin', 27, 'US', 'AlvinA27', 'easter_egg', false);
-
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 
 CREATE TABLE countries (
-  id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  country_code TEXT,
-  name TEXT,
-  FOREIGN KEY (country_code)
-  REFERENCES users (id)
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  country_code VARCHAR(100) UNIQUE,
+  name TEXT
 );
-
--- Don't touch below this line --
-
 
 INSERT INTO countries(country_code, name)
 VALUES ('US', 'United States');
@@ -127,6 +74,57 @@ VALUES (6, 14, "not sure how much lunch was, heres 20", 20.00, true);
 
 INSERT INTO transactions (user_id, recipient_id, note, amount, was_successful)
 VALUES (2, 13, "Happy birthday, sis! Lets get lunch soon.", 100.00, true);
+
+CREATE TABLE users (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    country_code VARCHAR(100) NOT NULL,
+    username VARCHAR(100) UNIQUE,
+    password TEXT NOT NULL,
+    is_admin BOOLEAN,
+	FOREIGN KEY (country_code)
+	REFERENCES countries(country_code)
+);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (1, 'David', 34, 'US', 'DavidDev', 'insertPractice', false);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (2, 'Samantha', 29, 'BR', 'Sammy93', 'addingRecords!', false);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (3, 'John', 39, 'CA', 'Jjdev21', 'welovebootdev', false);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (4, 'Ram', 42, 'IN', 'Ram11c', 'thisSQLcourserocks', false);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (5, 'Hunter', 30, 'US', 'Hdev92', 'backendDev', false);
+
+INSERT INTO users(id, name, age, country_code, username, password, is_admin)
+VALUES (6, 'Allan', 27, 'US', 'Alires', 'iLoveB00tdev', true);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Lance', 20, 'US', 'LanChr', 'b00tdevisbest', false);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Tiffany', 28, 'US', 'Tifferoon', 'autoincrement', true);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Lane', 27, 'US', 'wagslane', 'update_me', false);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Darren', 15, 'CA', 'Dshan', 'found_me', false);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Albert', 55, 'BR', 'BertDev', 'one_al_name', false);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Alvin', 27, 'US', 'AlvinA27', 'easter_egg', false);
+
+INSERT INTO users(name, age, country_code, username, password, is_admin)
+VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 ```
 
 # Left Join
