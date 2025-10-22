@@ -95,7 +95,7 @@ FROM users
 INNER JOIN countries on countries.country_code = users.country_code;
 ```
 
-Adjust the query to:
+My bro PP decided to mess with the database of the *TheSeanApp* (Stop selecting all PP, it's really bad for us). Adjust the query above to:
 
 * Return the `name`, and `age` fields from the `users` table.
 * Return the `name` field from the `countries` table and rename it to `country_name`.

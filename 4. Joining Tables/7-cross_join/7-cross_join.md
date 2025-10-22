@@ -8,8 +8,5 @@ Example:
 
 ## Assignment
 
-Write a query that performs a CROSS JOIN between the `users` table and the `countries` table.
+Write a query that performs a CROSS JOIN between the `users` table and the `countries` table. Select the `name` of the user and the `name` of the country.
 
-Select the `name` of the user and the `name` of the country.
-
-Goal: Generate a list showing every possible user matched with every possible country.

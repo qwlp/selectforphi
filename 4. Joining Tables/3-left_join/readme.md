@@ -146,7 +146,7 @@ ON e.department_id = d.id;
 
 Notice the simple alias declarations `e` and `d` for `employees` and `departments` respectively.
 
-Some developers do this to make their queries less verbose. That said, I personally *hate it* because single-letter variables are harder to understand the meaning of.
+Some developers do this to make their queries less wordy. That said, I personally *hate it* because single-letter variables are harder to understand the meaning of. Jg yy ta wtf sometimes its so hard to read sql queries because of this.
 
 ## Assignment
 

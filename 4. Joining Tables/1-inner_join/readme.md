@@ -98,8 +98,7 @@ The query above returns *all* the fields from *both* tables. The `INNER` keyword
 
 ## Assignment
 
-Our frontend team is working on a profile page and would like to display a user's country *name* instead of just the country's two-letter *code*. Let's start by writing a simple join between the `users` table and `countries` table. We will expand on this query more in the next exercise.
+Our CEO, Sean, has decided to let our frontend team work on a profile page and has commanded them to display a user's country *name* instead of just the country's two-letter *code* (Cause maybe we want to know what *KR* stands for hehe). Let's start by writing a simple join between the `users` table and `countries` table. We will expand on this query more in the next exercise.
 
 * Write an `INNER JOIN` between `users` and `countries`
 * Return *all* fields from both tables
-* Join on the `country_code` field

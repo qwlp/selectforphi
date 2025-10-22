@@ -3,7 +3,7 @@ DROP TABLE countries;
 DROP TABLE users;
 DROP TABLE transactions;
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name TEXT NOT NULL,
     age INTEGER NOT NULL,
     country_code TEXT NOT NULL,
@@ -52,15 +52,12 @@ INSERT INTO users(name, age, country_code, username, password, is_admin)
 VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 
 CREATE TABLE countries (
-  id INTEGER PRIMARY KEY,
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
   country_code TEXT,
   name TEXT,
   FOREIGN KEY (country_code)
   REFERENCES users (country_code)
 );
-
--- Don't touch below this line --
-
 
 INSERT INTO countries(country_code, name)
 VALUES ('US', 'United States');
@@ -78,7 +75,7 @@ INSERT INTO countries(country_code, name)
 VALUES ('BR', 'Brazil');
 
 CREATE TABLE transactions (
-  id INTEGER PRIMARY KEY,
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
   user_id INTEGER NOT NULL,
   recipient_id INTEGER,
   sender_id INTEGER,
@@ -149,7 +146,7 @@ ON departments.region_id = regions.id
 
 ## Assignment
 
-Our front-end team is finalizing the *profile* page for *TheSeanApp*. We need to write a query that returns all the `user` data they need for an individual user's profile. The query needs to return the following fields:
+Our front-end team (Probably Pich, because Sean has decided to hire her) is finalizing the *profile* page for *TheSeanApp*. We need to write a query that returns all the `user` data they need for an individual user's profile. The query needs to return the following fields:
 
 1. The user's `id`
 2. The user's `name`
