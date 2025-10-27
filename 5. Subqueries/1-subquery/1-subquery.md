@@ -1,5 +1,9 @@
-Copy paste the following:
+Copy paste and deang the following:
 ```sql
+DROP TABLE users;
+DROP TABLE countries;
+DROP TABLE transactions;
+
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
   name TEXT NOT NULL,
