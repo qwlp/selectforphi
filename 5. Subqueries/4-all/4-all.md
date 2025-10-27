@@ -1,74 +1,52 @@
-# Subqueries with `ALL`
+# `ALL`
 
-The `ALL` keyword in SQL is a powerful tool used in conjunction with comparison operators in subqueries. It allows you to compare a single value to every value in a result set returned by a subquery.
+The `ALL` keyword helps you compare a value to **every single value** in a list from a subquery.
 
-## The Basic Syntax
+Think of it like asking a question about a whole group. For example, "Is Lane older than `ALL` the users in Canada?"
 
-The general structure for using `ALL` in a subquery is as follows:
+## How It Works
 
-```sql
-operand comparison_operator ALL (subquery)
-```
+The comparison you use (`>`, `<`, `=`, etc.) must be true for **every item** in the subquery's result for the whole condition to be `TRUE`.
 
-Here, the `comparison_operator` can be any of the standard operators such as `=`, `!=`, `<`, `>`, `<=`, or `>=`.
-
-## How `ALL` Works
-
-The `ALL` condition evaluates to `TRUE` only if the comparison is true for *every single value* returned by the subquery. Let's consider an example:
+**Example:** Find users who are older than **every single user** from Canada.
 
 ```sql
-SELECT s1 FROM t1 WHERE s1 > ALL (SELECT s1 FROM t2);
+SELECT name, age FROM users
+WHERE age > ALL (
+  -- This subquery first gets a list of ages for all users in Canada
+  SELECT age FROM users WHERE country_code = 'CA'
+);
 ```
 
-In this query, a row from table `t1` will be selected only if its `s1` value is greater than *all* the `s1` values present in table `t2`.
+**What happens:**
+1.  The inner query runs first and finds the ages of all users in Canada. Let's say it returns a list of `(39, 15)`.
+2.  The outer query then checks each user one by one. For a user to be selected, their age must be greater than 39 **AND** greater than 15.
+3.  In our data, only Albert (age 55) and Ram (age 42) would be selected.
 
-**Here's how the outcome can vary:**
+## The Most Common Use: `NOT IN`
 
-*   **TRUE:** If `t1` has a row with `s1 = 10` and `t2` contains `(-5, 0, 5)`, the condition is `TRUE` because 10 is greater than every value in `t2`.
-*   **FALSE:** If `t2` contains `(12, 6, -100)`, the condition becomes `FALSE` because 10 is not greater than 12.
-*   **UNKNOWN (NULL):** If `t2` contains `(0, NULL, 1)`, the result is `UNKNOWN` (treated as `NULL`). This is because the comparison with `NULL` is always unknown.
+You will most often see `ALL` used as its alias, `NOT IN`.
 
-## "Edge Cases" to Keep in Mind
+`NOT IN` is just a more readable way of saying **`<> ALL`** (Not Equal To All).
 
-When working with subqueries, it's important to consider two special scenarios:
+**Example:** Find all users who are **not** from the United States or Canada.
 
-1.  **Empty Tables:** If the subquery returns an empty set, the `ALL` condition will surprisingly evaluate to `TRUE`.
-    *   `SELECT * FROM t1 WHERE 1 > ALL (SELECT s1 FROM t2);` is `TRUE` if `t2` is empty.
-    *   However, `SELECT * FROM t1 WHERE 1 > (SELECT s1 FROM t2);` will be `NULL` if `t2` is empty.
-
-2.  **NULL Values:** As seen in the example above, the presence of `NULL` in the subquery's result set can lead to an `UNKNOWN` outcome.
-
-## The `NOT IN` Alias
-
-An important and more commonly used alias for `<> ALL` is `NOT IN`. These two expressions are functionally identical.
-
-The following two statements will produce the same result:
-
+This statement:
 ```sql
-SELECT s1 FROM t1 WHERE s1 <> ALL (SELECT s1 FROM t2);
-```
-
+SELECT name FROM users
+WHERE country_code NOT IN ('US', 'CA');```
+Is the same as this statement:
 ```sql
-SELECT s1 FROM t1 WHERE s1 NOT IN (SELECT s1 FROM t2);
+SELECT name FROM users
+WHERE country_code <> ALL ('US', 'CA');
 ```
 
-While they are equivalent, `NOT IN` is often preferred for its readability.
+They both do the same thing, but `NOT IN` is much easier to read!
 
-## Using `TABLE` with `ALL`
+## Important Things to Remember
 
-If your subquery simply selects from a table with a single column, you can use the `TABLE` keyword as a shorthand:
-
-```sql
-SELECT s1 FROM t1 WHERE s1 <> ALL (TABLE t2);
-```
-
-This is equivalent to:
-
-```sql
-SELECT s1 FROM t1 WHERE s1 <> ALL (SELECT * FROM t2);
-```
-
-However, this syntax cannot be used if the subquery involves a column expression, like an aggregate function. For instance, `SELECT * FROM t1 WHERE 1 > ALL (SELECT MAX(s1) FROM t2);` cannot be rewritten with `TABLE t2`.
+1.  **Empty Results:** If the subquery returns no rows, the `ALL` condition will surprisingly return `TRUE`.
+2.  **NULL Values:** If the list from the subquery contains a `NULL`, your `ALL` condition might not work as you expect. It's best to filter out `NULL`s if you can.
 
 ## Assignment
 
