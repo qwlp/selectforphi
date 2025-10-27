@@ -36,3 +36,7 @@ SELECT ProductName FROM Products WHERE ProductID = ANY (SELECT ProductID FROM Or
 *   `NOT IN` is an alias for `<> ALL`, not `<> ANY`.
 
 ## Assignment: :
+
+TheSeanApp's fraud department wants to review the users who have *received* large payments. They need a list of all users who have been the recipient of any transaction with an amount of $50.00 or more.
+
+Use a subquery with `IN`, `ANY`, or `SOME` to get the `name` and `username` of all users who have received a transaction of at least $50.
