@@ -5,11 +5,11 @@ DROP TABLE countries;
 DROP TABLE transactions;
 
 CREATE TABLE users (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   name TEXT NOT NULL,
   age INTEGER NOT NULL,
   country_code TEXT NOT NULL,
-  username TEXT UNIQUE,
+  username VARCHAR(100) UNIQUE,
   password TEXT NOT NULL,
   is_admin BOOLEAN
 );
@@ -54,7 +54,7 @@ INSERT INTO users(name, age, country_code, username, password, is_admin)
 VALUES ('Al', 39, 'JP', 'quickCoder', 'snake_case', false);
 
 CREATE TABLE transactions (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   user_id INTEGER NOT NULL,
   recipient_id INTEGER,
   sender_id INTEGER,
