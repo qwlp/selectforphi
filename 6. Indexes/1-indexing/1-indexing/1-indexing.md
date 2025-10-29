@@ -4,11 +4,11 @@ In a database, an index is a data structure that helps the database locate and r
 
 Think of a book's index. It allows you to quickly find the specific key terms and topics from the book without having to read every page.
 
-# Where can indexes be useful?
+## Where can indexes be useful?
 
 Indexes are usually used to speed up queries with `WHERE`, `JOIN`, `ORER BY` and `GROUP BY` clauses.
 
-# How to create
+## How to create
 
 ```SQL
 CREATE INDEX idx_users_name ON users(name);
@@ -17,7 +17,7 @@ CREATE INDEX idx_users_name ON users(name);
 Format: CREATE INDEX index_name ON table_name(column_name);
 Format (for multiple columns): CREATE INDEX index_name ON table_name(column_name1, column_name2, column_name3, ...);
 
-# How to drop
+## How to drop
 
 ```SQL
 DROP INDEX idx_users_name ON users;
@@ -26,7 +26,7 @@ DROP INDEX idx_users_name ON users;
 Format: DROP INDEX index_name ON table_name;
 // There is no need to mention the column name, since the database already recognises the unique name of the index. //
 
-# Types of indexes
+## Types of indexes
 
 1. Clustered indexes
    - created automatically when a primary key is created
@@ -45,5 +45,6 @@ Format: DROP INDEX index_name ON table_name;
 
 ## Assignment
 
-The Techconnect event had around 130 total participants.
-Write a query to find all participants whose last name starts with 'S'. The `Participants` table has the following fields: `email`, `first_name`, and `last_name`. Then, create an index on the `last_name` column to speed up the query. Observe the difference in response time between the query with and without the index.
+TheSeanApp requires names to be searched faster, well I mean come on you don't want to wanting for a while just to search for names, so we need to create an index on the name column.
+
+* Create an index for the `names` columns in the `users` table.
