@@ -1,4 +1,4 @@
-### Lesson 1: What is a Trigger?
+# What is a Trigger?
 
 A trigger is a small, automatic program that the database runs for you when something happens to a table. Think of it as “if this happens, do that.”
 
@@ -43,7 +43,8 @@ Example audit messages you might see:
 - “New user registered with id 42. Name: Sam, Username: sam_w”
 - “Updated transaction 18. Amount changed from 10.50 to 12.00”
 
-Assignment
+## Assignment
+
 - In your own words, what’s the difference between a trigger used for auditing and a trigger used for data quality?
 - Which kind of trigger (BEFORE or AFTER) would you use to:
   1) Fix an invalid `age` before saving a user?

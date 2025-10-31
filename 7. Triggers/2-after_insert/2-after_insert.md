@@ -6,7 +6,7 @@ What it does
 - In an AFTER trigger, you can read the inserted values with NEW, but you cannot change them.
 
 What you can access in this trigger
-- INSERT: NEW.column (the data that was just inserted)
+- INSERT: `NEW.column` (the data that was just inserted)
 
 When to use it at TheSeanApp
 - Record a “New user registered” entry in a users audit table
