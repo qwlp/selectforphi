@@ -1,51 +1,67 @@
 # What is a Trigger?
 
-A trigger is a small, automatic program that the database runs for you when something happens to a table. Think of it as “if this happens, do that.”
+A **trigger** is code that runs automatically when something happens to a table.
 
-At TheSeanApp, triggers help us:
-- Keep a history of important changes (auditing)
-- Enforce rules so our data stays clean and safe (data quality and protection)
+## When Do Triggers Run?
 
-What “something happens” means:
-- INSERT: a new row is added
-- UPDATE: a row is changed
-- DELETE: a row is removed
+Triggers fire on these events:
+- **INSERT** - when a new row is added
+- **UPDATE** - when a row is changed
+- **DELETE** - when a row is removed
 
-When triggers run:
-- BEFORE triggers run just before the change is saved
-  - Great for checking or fixing the incoming data (you can modify NEW values)
-- AFTER triggers run right after the change is saved
-  - Great for logging what happened (you cannot modify data here)
+## Timing: BEFORE vs AFTER
 
-What a trigger can “see”:
-- INSERT: NEW values (what’s being added)
-- UPDATE: OLD values (before) and NEW values (after)
-- DELETE: OLD values (what’s being removed)
+**BEFORE triggers** run before the change is saved
+- Can modify incoming data
+- Good for validation and fixing values
 
-How we’ll use triggers in TheSeanApp:
-- Auditing examples
-  - Log new users or changes to users in the `users_audit` table
-  - Log transaction changes in the `transaction_audit` table
-- Data quality/protection examples
-  - Make sure new users have a reasonable `age` before saving
-  - Prevent deleting important records (like certain transactions or admin users)
+**AFTER triggers** run after the change is saved
+- Cannot modify data
+- Good for logging and auditing
 
-Mental model:
-- BEFORE = “check and fix” (change NEW data if needed)
-- AFTER = “write it down” (record what happened for the audit trail)
+## What Can Triggers See?
 
-Good things to remember:
-- Keep trigger logic simple and fast
-- Use clear, helpful messages in audit logs
-- Prefer consistent names like `tr_users_ai` (“trigger, users, after insert”)
+| Event  | OLD (before) | NEW (after) |
+|--------|--------------|-------------|
+| INSERT | ❌           | ✅          |
+| UPDATE | ✅           | ✅          |
+| DELETE | ✅           | ❌          |
 
-Example audit messages you might see:
-- “New user registered with id 42. Name: Sam, Username: sam_w”
-- “Updated transaction 18. Amount changed from 10.50 to 12.00”
+## How We Use Triggers at TheSeanApp
+
+**Auditing** - Track changes
+- Log new users in `users_audit`
+- Log transaction changes in `transaction_audit`
+
+**Data Quality** - Enforce rules
+- Keep ages between 13-120
+- Keep transaction amounts between $0.01-$10,000
+- Prevent deleting admin users or important transactions
+
+## Mental Model
+
+Think of triggers as automatic "if-then" rules:
+- **BEFORE** = "check and fix" (modify NEW values)
+- **AFTER** = "write it down" (record to audit log)
+
+## Naming Convention
+
+Use this pattern: `tr_<table>_<timing><action>`
+
+Examples:
+- `tr_users_ai` = trigger on users, after insert
+- `tr_transactions_bu` = trigger on transactions, before update
+- `tr_users_bd` = trigger on users, before delete
 
 ## Assignment
 
-- In your own words, what’s the difference between a trigger used for auditing and a trigger used for data quality?
-- Which kind of trigger (BEFORE or AFTER) would you use to:
-  1) Fix an invalid `age` before saving a user?
-  2) Record a note that a transaction was deleted?
+1. In your own words, what's the difference between a BEFORE trigger and an AFTER trigger?
+
+2. Which trigger type would you use for:
+   - Fixing an invalid age before saving? ___________
+   - Recording that a transaction was deleted? ___________
+
+3. If you want to see both the old and new values in a trigger, which event must you use?
+   - ☐ INSERT
+   - ☐ UPDATE
+   - ☐ DELETE
