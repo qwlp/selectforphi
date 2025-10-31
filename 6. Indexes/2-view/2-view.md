@@ -93,14 +93,6 @@ DROP VIEW v_users_us;
 
 The underlying table remains unchanged.
 
-## Quick Tips
-
-✅ Simplify complex queries with views
-✅ Hide sensitive data
-✅ Views always show latest data
-❌ Don't update through views
-❌ Can't add indexes to views (but MySQL uses table indexes)
-
 ## Assignment
 
 Using TheSeanApp database:
