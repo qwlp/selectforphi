@@ -1,45 +1,40 @@
--- Solution for Lesson 2: AFTER INSERT Trigger on users table
-
--- First, create the audit table if it doesn't exist
-CREATE TABLE IF NOT EXISTS users_audit (
-    audit_id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    audit_datetime DATETIME NOT NULL,
-    audit_user VARCHAR(100) NOT NULL,
-    audit_change VARCHAR(500) NOT NULL
+-- solution
+CREATE TABLE transaction_audit (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id INT NOT NULL,
+    user_id INT NOT NULL,
+    amount INT NOT NULL,
+    note VARCHAR(255) NOT NULL,
+    change_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the AFTER INSERT trigger
 DELIMITER //
 
-CREATE TRIGGER tr_users_ai
-AFTER INSERT ON users
+CREATE TRIGGER tr_transactions_ai
+AFTER INSERT ON transactions
 FOR EACH ROW
 BEGIN
-    INSERT INTO users_audit
-    (
-        audit_datetime,
-        audit_user,
-        audit_change
-    )
-    VALUES
-    (
-        NOW(),
-        USER(),
-        CONCAT(
-            'New user registered with id ', NEW.id,
-            '. Name: ', NEW.name,
-            '. Username: ', NEW.username
-        )
+    INSERT INTO transaction_audit (transaction_id, user_id, amount, note)
+    VALUES (
+        NEW.id,
+        NEW.user_id,
+        NEW.amount,
+        IFNULL(NEW.note, 'No note provided')
     );
 END//
 
 DELIMITER ;
 
--- Test the trigger by inserting a new user
-INSERT INTO users(name, age, country_code, username, password, is_admin)
-VALUES ('Sean', 25, 'US', 'SeanTheMan', 'myawesomeapp', false);
 
--- Verify the audit log was created
-SELECT * FROM users_audit;
+-- test it
+-- with note
 
--- Expected output: One audit record showing the new user registration
+INSERT INTO transactions (user_id, recipient_id, sender_id, note, amount, was_successful) VALUES (101, 201, 301, 'Payment for services', 500, 1);
+
+-- with no note
+
+INSERT INTO transactions (user_id, recipient_id, sender_id, amount, was_successful) VALUES (102, 202, 302, 75, 1);
+
+-- verify 
+
+SELECT transaction_id, user_id, amount, note FROM transaction_audit;
