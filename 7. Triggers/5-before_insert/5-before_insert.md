@@ -69,3 +69,13 @@ Do the same for the `users` table:
 - Create `tr_users_bi` (BEFORE INSERT)
 - Enforce: minimum age = 13, maximum age = 120
 - Test with ages like 5 and 200
+
+Hint:
+Use `SIGNAL SQLSTATE '45000'`: this is for raising an error.
+```sql
+    -- Check if age is less than 13
+    IF NEW.age < 13 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'ERROR: User age must be at least 13 years old.';
+    END IF;
+``
