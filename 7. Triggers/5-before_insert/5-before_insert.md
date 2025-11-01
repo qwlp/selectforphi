@@ -78,4 +78,4 @@ Use `SIGNAL SQLSTATE '45000'`: this is for raising an error.
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'ERROR: User age must be at least 13 years old.';
     END IF;
-``
+```
