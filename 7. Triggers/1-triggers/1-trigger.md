@@ -1,7 +1,9 @@
 # What is a Trigger?
 
 A **trigger** is code that runs automatically when something happens to a table.
+
 ![Trigger](https://i.imgur.com/LhjuLlX.png)
+
 ## When Do Triggers Run?
 
 Triggers fire on these events:
